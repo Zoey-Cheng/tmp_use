@@ -7,13 +7,10 @@ spec:
   containers:
   - name: train
     image: gcr.io/core-verbena-328218/mnist_train:2.0
-    imagePullPolicy: IfNotPresent
     ports:
     - containerPort: 5000
-    volumeMounts:
-      - name: app-pv
-        mountPath: /home/app
-  volumes:
-    - name: app-pv
-      persistentVolumeClaim:
-        claimName: model-holder
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+  nodeSelector:
+    cloud.google.com/gke-accelerator: nvidia-tesla-t4
