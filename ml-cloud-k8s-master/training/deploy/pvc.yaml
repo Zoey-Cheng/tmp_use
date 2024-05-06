@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: model-holder
 spec:
-  storageClassName: ibmc-vpc-block-general-purpose
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
