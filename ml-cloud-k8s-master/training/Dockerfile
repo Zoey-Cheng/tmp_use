@@ -1,13 +1,19 @@
-# Start with a Linux micro-container to keep the image tiny
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
-# Document who is responsible for this image
+# Set metadata indicating the maintainer of the image
 LABEL maintainer="Ziyun Cheng <zc3068@nyu.edu>"
 
-# Install just the Python runtime (no dev)
-RUN apt-get update && apt-get install -y \
-    python3 python3-dev gcc gfortran musl-dev \
-    python3-pip ca-certificates
+# Set environment variables to reduce Python package issues and ensure output is sent straight to the terminal without buffering
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies required for Python packages
+RUN apt-get update && \
+    apt-get install -y gcc libc-dev && \
+    # Clean up the apt cache to reduce image size
+    rm -rf /var/lib/apt/lists/* \
+    build-essential
 
 # Set up a working folder and install the pre-reqs
 WORKDIR /app
