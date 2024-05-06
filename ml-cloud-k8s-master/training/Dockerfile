@@ -1,8 +1,8 @@
 # Start with a Linux micro-container to keep the image tiny
-FROM debian
+FROM python:3.8-slim
 
 # Document who is responsible for this image
-MAINTAINER Mitchell Merrick-Thirlway "mm12063@nyu.edu"
+LABEL maintainer="Ziyun Cheng <zc3068@nyu.edu>"
 
 # Install just the Python runtime (no dev)
 RUN apt-get update && apt-get install -y \
