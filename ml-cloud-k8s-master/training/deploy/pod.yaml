@@ -6,7 +6,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: train
-    image: zc3068/mnist_train:2.0
+    image: gcr.io/core-verbena-328218/mnist_train:2.0
     imagePullPolicy: IfNotPresent
     ports:
     - containerPort: 5000
