@@ -3,7 +3,6 @@ kind: Pod
 metadata:
   name: train-pod
 spec:
-  restartPolicy: Never
   containers:
   - name: train
     image: gcr.io/core-verbena-328218/mnist_train:2.0
@@ -12,3 +11,5 @@ spec:
     resources:
       limits:
         nvidia.com/gpu: 1
+  nodeSelector:
+    cloud.google.com/gke-accelerator: nvidia-tesla-t4
