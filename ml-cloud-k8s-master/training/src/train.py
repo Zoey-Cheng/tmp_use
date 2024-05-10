@@ -123,7 +123,7 @@ def main():
         transforms.Normalize((0.1307,), (0.3081,))
         ])
 
-    loc = "/home/app/data"
+    loc = "/app/data"
     dataset1 = datasets.MNIST(loc, train=True, download=True,
                        transform=transform)
     dataset2 = datasets.MNIST(loc, train=False,
