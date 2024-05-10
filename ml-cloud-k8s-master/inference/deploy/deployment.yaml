@@ -17,7 +17,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: infer
-        image: mm12063/mnist_infer:8.0
+        image: chengziyun/hw5-inference:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
