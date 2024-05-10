@@ -11,15 +11,19 @@ ENV PYTHONUNBUFFERED 1
 # Install system dependencies required for Python packages
 RUN apt-get update && \
     apt-get install -y gcc libc-dev && \
-    # Clean up the apt cache to reduce image size
-    rm -rf /var/lib/apt/lists/* \
-    build-essential
+    rm -rf /var/lib/apt/lists/*
 
 # Set up a working folder and install the pre-reqs
 WORKDIR /app
 ADD src/requirements.txt /app
 RUN pip3 install --upgrade pip setuptools
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Install torchvision to use its utilities for downloading MNIST dataset
+RUN pip3 install torchvision
+
+# Download the MNIST dataset into the image
+RUN python3 -c "from torchvision import datasets, transforms; datasets.MNIST('/app/data', download=True, transform=transforms.ToTensor())"
 
 # Add the code as the last Docker layer because it changes the most
 ADD src/train.py  /app/train.py
